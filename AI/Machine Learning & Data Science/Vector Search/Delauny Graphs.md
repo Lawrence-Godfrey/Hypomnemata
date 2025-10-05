@@ -9,3 +9,6 @@ Mesh generation, interpolation (esp. natural neighbour interpolation), computer 
 - Equivalent to saying: for each triangle in the triangulation, the **circumcircle** of that triangle contains no other points from the set inside it.
 - In higher dimensions, it generalises to simplices (tetrahedra, etc.).
 
+## Voronoi and Delauny
+
+![[Pasted image 20250928095015.png|center]]
