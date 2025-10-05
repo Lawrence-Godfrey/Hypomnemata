@@ -34,11 +34,11 @@ HNSW (Hierarchical Navigable Small World graphs) is an ANN (Approximate Nearest 
     - Controls recall/speed trade-off at search time.
     - Higher `efSearch` → more thorough search → higher recall but slower query.
     - You can adjust this dynamically at query time.
-## HNSW vs [[IVF]] (Inverted File Index, e.g. FAISS IVF)
+## HNSW vs [[IVF (Inverted File Index)|IVF]] (Inverted File Index, e.g. FAISS IVF)
 - IVF clusters vectors (typically via k-means), then search probes a subset of clusters.
 - IVF scales well to billions of vectors but may require careful tuning of cluster size/probe count.
 - HNSW usually gives higher recall out of the box, but memory overhead is larger.
-## HNSW vs [[PQ]] (Product Quantisation) / Compressed indexes
+## HNSW vs [[Product Quantisation|PQ]] (Product Quantisation) / Compressed indexes
 - PQ compresses vectors for memory savings and speed at cost of precision.
 - HNSW typically stores full vectors (unless combined with PQ).
 - For memory-constrained environments, PQ or IVF-PQ is preferable. For raw speed + recall, HNSW dominates.
