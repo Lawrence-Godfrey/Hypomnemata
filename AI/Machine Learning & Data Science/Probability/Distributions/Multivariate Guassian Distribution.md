@@ -6,5 +6,5 @@ A [[Normal Distribution]] might not work well for certain datasets where the fea
 Rather model $p(x)$ all at once. $\mu$ is now a matrix in $\mathbb{R}^n$ and $\Sigma$ is a matrix in $\mathbb{R}^{n\times n}$. This automatically captures correlations between features.
 
 #### Notes
- - While labels aren't required to fit a Gaussian model, they are useful for evaluating the [[Performance Metrics]] of the model.
+ - While labels aren't required to fit a Gaussian model, they are useful for evaluating the performance of the model.
  - If raw dataset is not Gaussian, it can be mapped to a Gaussian distribution![[Pasted image 20230828172228.png | center]]

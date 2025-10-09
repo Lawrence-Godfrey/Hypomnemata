@@ -51,7 +51,7 @@ https://cdn.openai.com/research-covers/language-unsupervised/language_understand
 
 ![[Pasted image 20250406191443.png]]
 
- - [[AI/Machine Learning & Data Science/Natural Language Processing/Performance Metrics#Perplexity|Perplexity]] score of 18.4.
+ - [[Perplexity|Perplexity]] score of 18.4.
  - Uses [[Byte Pair Encoding]] with 40,000 merges.
  - Uses [[GELU Activation]] (Gaussian Error Linear Unit) activation functions for the feedforward network.
  - Uses learned position embeddings instead of the sinusoidal version proposed in [[2017 - Attention Is All You Need]].
