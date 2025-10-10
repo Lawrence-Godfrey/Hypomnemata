@@ -45,6 +45,8 @@ Consider a single sample (row) with features `[3, 4]`.
 -   The new L2 norm is $\sqrt{0.6^2 + 0.8^2} = \sqrt{0.36 + 0.64} = \sqrt{1} = 1$.
 
 Useful when the direction of the data vector matters more than its magnitude. Common in text classification and clustering where **Cosine Similarity** is the distance metric.
+
+![[Pasted image 20251010171830.png]]
 ## Impact on Distance Metrics
 How you scale your data has significant implications for distance calculations, which are at the heart of many ML algorithms (like k-NN, SVM, and clustering).
 -   **Euclidean Distance:** This metric is sensitive to the scale of the features. If one feature has a much larger range than others (e.g., salary vs. age), it will dominate the distance calculation.

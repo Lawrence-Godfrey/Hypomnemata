@@ -1,7 +1,5 @@
 Exploratory Data Analysis (EDA) is a critical step before you proceed to model building. It helps you understand the structure, trends, and anomalies in the data. Below are common EDA techniques, followed by tips on how to interpret results, which can be particularly useful for multivariate linear regression:
-
 ### Common EDA Techniques
-
 1. **Data Summary**
     - Use descriptive statistics (`mean`, `median`, `std`, `min`, `max`, etc.) to summarise each numerical variable.
     - For categorical variables, look at frequency distribution.
