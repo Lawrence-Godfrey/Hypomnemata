@@ -18,7 +18,7 @@ For two discrete probability distributions, $p$ (true distribution) and $q$ (pre
 $$L=-∑y_{j}​log(\hat{y}​_j​)$$
 Cross-entropy loss is commonly used in classification problems in machine learning, especially in neural networks. The true distribution typically has a probability of 1 for the correct class and 0 for all other classes (in the case of one-hot encoded labels), and the predicted distribution is the model's estimated probabilities for each class. The loss measures how well the predicted probabilities match the true labels. 
 
-This derives from [[KL divergence]], which measures the difference between two probability distributions. The reason we assume probability distributions even if the output of the model is a one-hot vector is because a probabilistic interpretation allows us to quantify the uncertainty of predictions.
+This derives from [[AI/Machine Learning & Data Science/Probability/Kullback-Leibler Divergence|KL divergence]], which measures the difference between two probability distributions. The reason we assume probability distributions even if the output of the model is a one-hot vector is because a probabilistic interpretation allows us to quantify the uncertainty of predictions.
 
 This essentially only considers the true label and ignores everything else, which is why it's often paired with Softmax Regression for [[AI/Machine Learning & Data Science/Supervised Learning/Logistic Regression#Multi-class Classification|Multi-class Classification]], since the Softmax function first normalises the results. Without this the single logit corresponding to the true label does not have much meaning.
 ### Binary Cross-Entropy Loss
