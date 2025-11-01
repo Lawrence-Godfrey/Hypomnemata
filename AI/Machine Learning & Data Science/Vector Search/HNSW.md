@@ -48,7 +48,8 @@ HNSW (Hierarchical Navigable Small World graphs) is an ANN (Approximate Nearest 
 - **Dynamic index**: supports insertion of new vectors without full rebuild (unlike IVF/PQ which often require re-training).
 - **Deterministic quality**: performance is stable across many workloads, unlike LSH or trees that can degrade heavily.
 ## Weaknesses
-- **Disjoint Communities**: Performance can degrade when you have extreme clustering, since pointer may get stuck in the wrong cluster at a high level and it can be hard to get out of that cluster. 
+- **Disjoint Communities**: Performance can degrade when you have extreme clustering, since pointer may get stuck in the wrong cluster at a high level and it can be hard to get out of that cluster.
+- **Greedy Search**: can get stuck in local minima if the graph is not well connected, an issue known as "early stopping".
 - **Memory-hungry**: stores multiple layers of graph connections, overhead can be ~5–10× the raw vector size.
 - **Index build time** is relatively high (graph construction is expensive). Not ideal if you need frequent full rebuilds.
 - **Deletion** is not natively supported (requires lazy deletion or rebuild).
