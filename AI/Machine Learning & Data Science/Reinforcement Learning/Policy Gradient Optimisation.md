@@ -7,7 +7,7 @@ $$
 
 When we have a deep neural network, our goal is to change the parameters of the network iteratively such that we maximise a loss function. 
 
-This is a typical use case for Stochastic Gradient Descent (SGD). In our case we want to maximise a function:
+This is a typical use case for [[Gradient Descent|Stochastic Gradient Descent]] (SGD). In our case we want to maximise a function:
 
 $$
 \theta_{k+1} = \theta_k + \alpha \nabla_\theta J(\pi_\theta) \big|_{\theta=\theta_k} 
@@ -19,6 +19,6 @@ The problem is that to calculate the policy gradient, we need to evaluate it ove
 
 There are two main ways to estimate the policy gradient: 
 1. **[[REINFORCE]] algorithm**: This is a Monte Carlo method that estimates the policy gradient using complete trajectories sampled from the policy.
-2. **Actor-Critic methods**: These methods use a value function (the critic) to estimate the expected return, which reduces the variance of the policy gradient estimate. The actor updates the policy parameters using the critic's estimates. The gradient is estimated as:
+2. **[[Advantage Estimation/Actor-Critic Methods|Actor-Critic methods]]**: These methods use a value function (the critic) to estimate the expected return, which reduces the variance of the policy gradient estimate. The actor updates the policy parameters using the critic's estimates, typically using [[Advantage Estimation/README|advantage estimation]] techniques like [[Advantage Estimation/Generalised Advantage Estimation|GAE]].
 
 

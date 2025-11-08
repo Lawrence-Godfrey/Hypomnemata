@@ -5,11 +5,9 @@ It was introduced by Ronald J. Williams in 1992.
 **Pros**:
 - Simple to implement
 - Works with stochastic policies
-
 **Cons**:
 - High variance in gradient estimates
 - Requires complete trajectories for each update
-
 ## Deriving the Policy Gradient
 To derive the policy gradient, we start with the definition of the expected return:
 $$
@@ -40,6 +38,16 @@ Expression for grad-log-prob:
 $$
 = \mathbb{E}_{\tau \sim \pi_\theta} \left[\sum_{t=0}^{T} \nabla_\theta \log \pi_\theta(a_t | s_t) R(\tau)\right]
 $$
+
+Or
+
+$$
+= \frac{1}{N} \sum_{i=1}^{N} \left[\sum_{t=0}^{T} \nabla_\theta \log \pi_\theta(a_t | s_t) R(\tau_i)\right]
+$$
+
+Where $N$ is the number of sampled trajectories.
+
+
 This final expression tells us we can estimate the gradient by:
 1. **Sample trajectories**: Just run your current policy and collect trajectories (e.g., play 100 games)
 2. **Compute a simple formula**: For each trajectory, compute $\sum_{t=0}^{T} \nabla_\theta \log \pi_\theta(a_t | s_t) R(\tau)$
@@ -51,7 +59,7 @@ The expression $\nabla_\theta log \pi_\theta(a_t | s_t) R(\tau)$ means:
 
 Breaking it down:
  - $\nabla_\theta \log \pi_\theta(a_t | s_t)$: Direction to change parameters to make action $a_t$ more likely in state $s_t$.
- - $R(\tau)$: How good was the entire trajectory?
+ - $R(\tau)$: How good was the entire trajectory? (This is technically a Monte Carlo estimate of the [[Q Functions|Q Function]]).
  - *Product*: Scale the update by trajectory quality. 
 ## Log-Derivative Trick
 The log-derivative trick (also called the "likelihood ratio trick" or [[REINFORCE]] trick) is a clever algebraic manipulation. Here's how it works:
@@ -78,3 +86,21 @@ $$
 $$
 \nabla_\theta J(\pi_\theta) \approx \frac{1}{N} \sum_{i=1}^{N} \nabla_\theta \log P(\tau_i | \pi_\theta) R(\tau_i)
 $$
+
+## The Problem with REINFORCE
+While REINFORCE is elegant and straightforward, it suffers from high variance in its gradient estimates. In the REINFORCE equation, you can see that each log probability $\nabla_\theta \log \pi_\theta(a_t | s_t)$ is multiplied by the total return $R(\tau)$ of the entire trajectory. To illustrate this, we can rewrite the gradient estimate as:
+$$
+\nabla_\theta J(\pi_\theta) \approx \frac{1}{N} \sum_{i=1}^{N} \left[\sum_{t=0}^{T} \nabla_\theta \log \pi_\theta(a_{i, t} | s_t)\right] \left(\sum_{t=0}^{T} r(s_{i,t}, a_{i,t})\right)
+$$
+
+Each action cannot alter the rewards received in the past. Therefore, we can essentially ignore the past rewards for an action, and in doing so, reduce potential noise in our gradient estimates which would otherwise push our gradient path off the "true" gradient direction.
+
+## Variance Reduction Techniques
+Several techniques have been developed to reduce the high variance in REINFORCE:
+
+1. **[[Advantage Estimation/Reward-to-Go|Reward-to-Go]]**: Only weight each action by rewards that follow it, not the entire trajectory return
+2. **Baseline Subtraction**: Subtract a state-dependent baseline $b(s_t)$ (often the value function $V^{\pi}(s_t)$) from returns
+3. **[[Advantage Estimation/README|Advantage Estimation]]**: Combine reward-to-go with learned value function baselines to estimate how much better an action is than average
+
+These techniques form the foundation of modern [[Advantage Estimation/Actor-Critic Methods|actor-critic methods]], where a separate value function network (the "critic") is trained to estimate $V^{\pi}(s_t)$, which is then used to compute advantages for updating the policy network (the "actor"). See the notes on [[Advantage Estimation/Temporal Difference Error|TD error]] and [[Advantage Estimation/Generalised Advantage Estimation|GAE]] for the state-of-the-art approaches.
+
