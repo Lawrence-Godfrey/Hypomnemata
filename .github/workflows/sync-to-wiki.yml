@@ -11,6 +11,8 @@ on:
 jobs:
   sync-wiki:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout main repository
@@ -25,7 +27,7 @@ jobs:
 
       - name: Clone wiki repository
         run: |
-          git clone https://github.com/${{ github.repository }}.wiki.git wiki
+          git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git wiki
 
       - name: Transform and sync content
         run: |
@@ -36,6 +38,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Set up authentication for push
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git
+
           git add .
           if git diff --staged --quiet; then
             echo "No changes to commit"
