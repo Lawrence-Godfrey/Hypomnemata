@@ -5,3 +5,4 @@
 # Apple Double files (resource forks)
 ._*
 **/._*
+__pycache__

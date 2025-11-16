@@ -1,0 +1,45 @@
+name: Sync to GitHub Wiki
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'AI/**/*.md'
+      - 'AI/media/**'
+
+jobs:
+  sync-wiki:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Clone wiki repository
+        run: |
+          git clone https://github.com/${{ github.repository }}.wiki.git wiki
+
+      - name: Transform and sync content
+        run: |
+          python .github/scripts/obsidian_to_wiki.py
+
+      - name: Commit and push to wiki
+        working-directory: wiki
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Sync from main repo: ${{ github.sha }}"
+            git push
+          fi
