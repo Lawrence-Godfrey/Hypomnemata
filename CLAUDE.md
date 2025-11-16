@@ -29,7 +29,7 @@ AI/
 │   ├── Upcycling/
 │   └── Individual paper notes (.md files)
 │
-└── media/                     # Images and diagrams referenced in notes
+└── media/                     # Images and diagrams referenced in notes (git-lfs tracked)
 ```
 
 ## Working with this Vault
@@ -70,6 +70,8 @@ AI/
 - Use Obsidian-style wiki-links (`[[Note Title]]`) to reference other notes in the vault
 - Integrate links naturally within the prose, not as separate link lists
 - Keep formatting clean and minimal
+- Use the `tree` command liberally to see the current directory structure when creating notes.
+- When writing about concepts which may already be in the vault, look for them using `tree` and link to them.
 
 ### Git Configuration
 
@@ -82,7 +84,7 @@ AI/
 ### Adding New Notes
 
 When creating new notes:
-- Place in the appropriate subdirectory based on topic
+- Place in the appropriate subdirectory based on topic (use `tree` to explore)
 - Use clear, descriptive filenames (e.g., "Thompson Sampling.md", not "ts.md")
 - Add a `README.md` if creating a new subdirectory
 - Use wiki-links to connect to related concepts
